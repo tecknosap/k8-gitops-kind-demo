@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: nginx
+  name: globalsend       # rename from nginx
   namespace: argocd
 spec:
   project: default
@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/tecknosap/k8-gitops-kind-demo
     targetRevision: main
-    path: helm/nginx
+    path: helm/globalsend      # point to the globalsend Helm chart
     helm:
       valueFiles:
         - values.yaml
