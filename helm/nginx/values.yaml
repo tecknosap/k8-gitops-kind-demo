@@ -1,8 +1,9 @@
 replicaCount: 1
 
 image:
-  repository: nginx
+  repository: tecknosap/globalsend   # full Docker Hub repo
   tag: latest
+  pullPolicy: IfNotPresent            # or Always, safer for remote image
 
 service:
   type: ClusterIP

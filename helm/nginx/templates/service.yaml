@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx
+  name: globalsend
 spec:
   selector:
-    app: nginx
+    app: globalsend
   ports:
     - port: {{ .Values.service.port }}
       targetPort: 80

@@ -24,7 +24,7 @@ provider "kubernetes" {
 }
 
 provider "helm" {
-  kubernetes = {
+  kubernetes {  # <-- nested block, not assignment
     config_path = "~/.kube/config"
   }
 }

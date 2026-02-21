@@ -1,31 +1,27 @@
-# Create the namespace where Argo CD will run
+# Create namespace for Argo CD
 resource "kubernetes_namespace" "argocd" {
   metadata {
     name = "argocd"
   }
 }
 
-# Install Argo CD using the official Helm chart
+# Install Argo CD with Helm
 resource "helm_release" "argocd" {
   name       = "argocd"
-  namespace  = kubernetes_namespace.argocd.metadata[0].name
-
-  # Official Argo Project Helm repository
+  namespace  = kubernetes_namespace.argocd.metadata[0].name  # okay, but can simplify
   repository = "https://argoproj.github.io/argo-helm"
   chart      = "argo-cd"
 
-  # Use values instead of `set` for maximum provider compatibility
   values = [
     yamlencode({
       server = {
         service = {
-          type = "ClusterIP"   # Keep Argo CD internal (port-forward later)
+          type = "ClusterIP"
         }
       }
     })
   ]
 
-  # Ensure namespace exists before Helm install
   depends_on = [
     kubernetes_namespace.argocd
   ]
